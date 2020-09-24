@@ -4,5 +4,5 @@ El trabajo consiste en hacer una aplicación para Android que permita visualizar
 
 Vista previa: 
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+![Alt Text](http://aatests.xyz/wp-content/uploads/2020/09/TheMovieDB.gif)
 
