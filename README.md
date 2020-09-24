@@ -1,3 +1,7 @@
 Trabajo Práctico Integrador para la materia "Tecnologías Móviles" del cuarto año de Ingeniería Informática en el Instituto Universitario Aeronáutico.
 
 El trabajo consiste en hacer una aplicación para Android que permita visualizar películas a través de la API de The Movie DB. 
+
+Vista previa: 
+
+![Vista previa de la apliación](http://aatests.xyz/wp-content/uploads/2020/09/TheMovieDB.gif)
