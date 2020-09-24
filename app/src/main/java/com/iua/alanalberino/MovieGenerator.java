@@ -9,7 +9,7 @@ public class MovieGenerator {
     ArrayList<Movie> movies;
 
     @SuppressLint("ResourceType")
-    public ArrayList<Movie> initMovies1(MainActivity mainActivity) {
+    public ArrayList<Movie> initMovies1() {
 
         movies = new ArrayList<Movie>();
         movies.add(new Movie("Dark", "https://image.tmdb.org/t/p/w220_and_h330_face/5LoHuHWA4H8jElFlZDvsmU2n63b.jpg"));
@@ -24,7 +24,7 @@ public class MovieGenerator {
     }
 
     @SuppressLint("ResourceType")
-    public ArrayList<Movie> initMovies2(MainActivity mainActivity) {
+    public ArrayList<Movie> initMovies2() {
 
         movies = new ArrayList<Movie>();
         movies.add(new Movie("Mulan", "https://image.tmdb.org/t/p/w220_and_h330_face/rd7ElSRYhN2CFqMcyH8rqrwLbd6.jpg"));

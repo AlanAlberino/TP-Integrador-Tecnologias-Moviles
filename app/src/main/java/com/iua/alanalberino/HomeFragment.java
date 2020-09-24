@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         CategoryGenerator categoryGenerator = new CategoryGenerator();
-        categories = categoryGenerator.initCategory((MainActivity) getActivity());
+        categories = categoryGenerator.initCategory();
 
         categoryAdapter = new CategoryAdapter(categories, getActivity().getApplicationContext());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity().getApplicationContext());
