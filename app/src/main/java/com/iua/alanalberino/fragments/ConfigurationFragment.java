@@ -20,7 +20,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ConfigurationFragment extends Fragment {
 
-    private static final String PREFS_NAME ="com.nicolasfanin.IUASampleApp.prefs";
+    private static final String PREFS_NAME ="com.iua.alanalberino.prefs";
     SharedPreferences sharedPreferences;
     CategorySelectionFragment categorySelectionFragment;
 

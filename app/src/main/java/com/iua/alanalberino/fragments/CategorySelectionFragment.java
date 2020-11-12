@@ -20,7 +20,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class CategorySelectionFragment extends DialogFragment {
 
-    private static final String PREFS_NAME ="com.nicolasfanin.IUASampleApp.prefs";
+    private static final String PREFS_NAME ="com.iua.alanalberino.prefs";
     SharedPreferences sharedPreferences;
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -21,7 +21,7 @@ public class CategoryGenerator {
 
     ArrayList<Category> categories;
     Application app;
-    private static final String PREFS_NAME ="com.nicolasfanin.IUASampleApp.prefs";
+    private static final String PREFS_NAME ="com.iua.alanalberino.prefs";
     SharedPreferences sharedPreferences;
 
     public CategoryGenerator(Application app) {
