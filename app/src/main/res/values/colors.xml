@@ -7,5 +7,7 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="azulTMDB">#8ECEA3</color>
+    <color name="darkGrey">#393939</color>
+
 
 </resources>

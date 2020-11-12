@@ -1,12 +1,45 @@
 <resources>
     <string name="app_name">TP Integrador Alberino</string>
-    <string name="blue">blue</string>
-    <string name="indigo">indigo</string>
-    <string name="red">red</string>
-    <string name="green">green</string>
-    <string name="orange">orange</string>
-    <string name="grey">grey</string>
-    <string name="amber">amber</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TextViews -->
+
+    <string name="user">Usuario:</string>
+    <string name="email">Email:</string>
+    <string name="password">Contraseña:</string>
+    <string name="phone">Teléfono:</string>
+    <string name="confirmPassword">Confirme su contraseña:</string>
+    <string name="userRegistration">Registro de usuario</string>
+    <string name="appConfiguration">Configuración de la aplicación</string>
+    <string name="dailyNotifications">Recibir notificaciones diarias:</string>
+    <string name="selectCategories">Seleccionar categorías a mostrar</string>
+    <string name="favorites">Favoritos</string>
+    <string name="moreInformation">Mas Información</string>
+    <string name="whatDoYouWantToSearch">¿Que desea buscar?</string>
+    <string name="tellYourFriends">Cuentales a tus amigos sobre TheMovieDB</string>
+    <string name="shareThisLink">Comparte este enlace para que tus amigos puedan estar al tanto de todas las novedades del mundo cinematográfico.</string>
+    <string name="copyLink">Copiar Enlace</string>
+    <string name="whatsapp">Whatsapp</string>
+    <string name="twitter">Twitter</string>
+    <string name="messenger">Messenger</string>
+    <string name="moreOptions">Más Opciones</string>
+    <string name="account">Cuenta</string>
+    <string name="help">Ayuda</string>
+    <string name="reportError">Reportar un error</string>
+    <string name="logout">Cerrar Sesión</string>
+    <string name="addToFavorites">Añadir a Favoritos</string>
+    <string name="share">Compartir</string>
+
+
+    <!-- EditTexts -->
+
+    <string name="insertUser">Ingrese su usuario.</string>
+    <string name="insertEmail">Ingrese su correo electrónico.</string>
+    <string name="insertPassword">Ingrese su contraseña.</string>
+    <string name="insertConfirmedPassword">Ingrese nuevamente su contraseña.</string>
+    <string name="insertPhone">Ingrese su número telefónico.</string>
+
+    <!-- Botones -->
+
+    <string name="login">Ingresar</string>
+    <string name="register">Registrarse</string>
 </resources>

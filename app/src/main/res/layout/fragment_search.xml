@@ -6,7 +6,7 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
 
     <ImageView
@@ -54,7 +54,7 @@
         android:layout_marginBottom="10dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
-        android:hint="¿Que desea buscar?"
+        android:hint="@string/whatDoYouWantToSearch"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"

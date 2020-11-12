@@ -1,4 +1,4 @@
-package com.iua.alanalberino;
+package com.iua.alanalberino.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,10 +12,19 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.iua.alanalberino.fragments.FavoriteFragment;
+import com.iua.alanalberino.R;
+import com.iua.alanalberino.fragments.SettingsFragment;
+import com.iua.alanalberino.fragments.HomeFragment;
+import com.iua.alanalberino.fragments.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
+    FavoriteFragment favoriteFragment;
+    HomeFragment homeFragment;
+    SearchFragment searchFragment;
+    SettingsFragment settingsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-        openFragment(HomeFragment.newInstance("", ""));
+
+        openFragment(new HomeFragment());
 
     }
 
@@ -33,18 +43,31 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
-                            openFragment(HomeFragment.newInstance("", ""));
+                            if(homeFragment==null){
+                                homeFragment = new HomeFragment();
+                            }
+                            openFragment(homeFragment);
                             return true;
-                        case R.id.navigation_sms:
-                            openFragment(SearchFragment.newInstance("", ""));
+                        case R.id.navigation_search:
+                            if(searchFragment==null)
+                                searchFragment = new SearchFragment();
+                            openFragment(searchFragment);
                             return true;
                         case R.id.navigation_notifications:
-                            openFragment(ConfigurationFragment.newInstance("", ""));
+                            if(settingsFragment==null)
+                                settingsFragment = new SettingsFragment();
+                            openFragment(settingsFragment);
+                            return true;
+                        case R.id.navigation_favorites:
+                            if(favoriteFragment==null)
+                                favoriteFragment = new FavoriteFragment();
+                            openFragment(favoriteFragment);
                             return true;
                     }
                     return false;
@@ -60,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
         Intent mailer = Intent.createChooser(intent, "Enviar mail utilizando:");
         startActivity(intent);
     }
+
+
 }
 
 

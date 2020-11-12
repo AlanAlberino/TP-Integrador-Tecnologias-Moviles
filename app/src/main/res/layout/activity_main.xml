@@ -5,8 +5,8 @@
     android:id="@+id/activity_main"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    tools:context=".MainActivity">
+    android:background="@color/black"
+    tools:context=".activities.MainActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
             app:menu="@menu/bottom_navigation_menu"
-            />
+        />
     </FrameLayout>
 
 
