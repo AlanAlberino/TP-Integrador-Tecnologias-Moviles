@@ -2,13 +2,10 @@ package com.iua.alanalberino.generators;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-
 import com.iua.alanalberino.async.DownloadFilesTask;
 import com.iua.alanalberino.model.Category;
-import com.iua.alanalberino.persistence.CategoriesDAO;
+
 import com.iua.alanalberino.persistence.CategoriesRepository;
 
 import org.json.JSONArray;
@@ -16,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import static android.content.Context.MODE_PRIVATE;

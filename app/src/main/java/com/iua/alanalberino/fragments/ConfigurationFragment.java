@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +14,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.iua.alanalberino.R;
-
-import org.w3c.dom.Text;
 
 import static android.content.Context.MODE_PRIVATE;
 

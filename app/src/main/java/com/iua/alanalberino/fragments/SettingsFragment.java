@@ -16,8 +16,6 @@ import com.iua.alanalberino.activities.LoginActivity;
 import com.iua.alanalberino.R;
 import com.iua.alanalberino.persistence.UserRepository;
 
-import org.w3c.dom.Text;
-
 
 public class SettingsFragment extends Fragment {
 

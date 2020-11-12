@@ -18,7 +18,6 @@ import com.iua.alanalberino.model.Favorite;
 import com.iua.alanalberino.persistence.FavoritesRepository;
 import com.iua.alanalberino.model.Movie;
 import com.iua.alanalberino.generators.MovieGenerator;
-//import com.iua.alanalberino.MovieViewModel;
 import com.iua.alanalberino.R;
 import com.iua.alanalberino.persistence.UserRepository;
 
@@ -28,7 +27,6 @@ import java.util.concurrent.ExecutionException;
 
 public class MovieFragment extends Fragment {
 
-    //private MovieViewModel mViewModel;
     private int id;
     Context context;
 

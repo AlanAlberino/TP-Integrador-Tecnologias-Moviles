@@ -1,7 +1,6 @@
 package com.iua.alanalberino.generators;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.iua.alanalberino.async.DownloadFilesTask;
 import com.iua.alanalberino.model.Movie;

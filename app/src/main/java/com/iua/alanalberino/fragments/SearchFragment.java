@@ -32,10 +32,6 @@ public class SearchFragment extends Fragment {
     private ArrayList<Movie> movies;
     LinearLayoutManager manager;
 
-    public SearchFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

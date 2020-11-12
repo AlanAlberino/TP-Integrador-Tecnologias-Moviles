@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,17 +33,6 @@ public class HomeFragment extends Fragment {
     private CategoryAdapter categoryAdapter;
     private ArrayList<Category> categories;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +45,8 @@ public class HomeFragment extends Fragment {
         if(!isNetworkConnected()){
             CategoriesRepository categoriesRepository = new CategoriesRepository(getActivity().getApplication());
             try {
-                Log.i("HomeFragment", "Por obtener categorias");
+
                 categories = (ArrayList<Category>) categoriesRepository.getCategories();
-                Log.i("HomeFragment", "Se obtuvieron"+ categories.size()+ " categorias");
                 MoviesRepository moviesRepository = new MoviesRepository(getActivity().getApplication());
                 for(Category category: categories){
                     category.setMovies((ArrayList<Movie>) moviesRepository.getMovies(category.getId()));
@@ -76,7 +63,6 @@ public class HomeFragment extends Fragment {
             CategoryGenerator categoryGenerator = new CategoryGenerator(getActivity().getApplication());
             try {
                 categories = categoryGenerator.initCategory();
-                Log.i("HomeFragment", "Recibidas "+categories.size()+ "categorias.");
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {

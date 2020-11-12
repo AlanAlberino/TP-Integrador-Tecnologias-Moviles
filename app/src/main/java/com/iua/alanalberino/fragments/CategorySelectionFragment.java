@@ -9,12 +9,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import com.iua.alanalberino.R;
 import com.iua.alanalberino.model.Category;
 import com.iua.alanalberino.persistence.CategoriesRepository;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
