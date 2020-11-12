@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 repository.setAsLoggedIn(usuario);
                 Intent listIntent = new Intent(this, MainActivity.class);
                 listIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                listIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(listIntent);
             }
             else{

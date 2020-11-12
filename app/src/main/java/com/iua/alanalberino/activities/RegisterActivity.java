@@ -86,6 +86,8 @@ public class RegisterActivity extends AppCompatActivity {
             repository.insert(new User(usuario, email, contrasena, telefono));
 
             Intent listIntent = new Intent(this, MainActivity.class);
+            listIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            listIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(listIntent);
         }
     }

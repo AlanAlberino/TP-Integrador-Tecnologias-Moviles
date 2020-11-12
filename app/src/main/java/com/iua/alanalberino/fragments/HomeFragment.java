@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -83,6 +84,18 @@ public class HomeFragment extends Fragment {
             recyclerView.setLayoutManager(manager);
             recyclerView.setAdapter(categoryAdapter);
         }
+
+        View.OnClickListener sonicListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MovieFragment mf = new MovieFragment(454626, getContext());
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(getId(), mf);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        };
+        getView().findViewById(R.id.button2).setOnClickListener(sonicListener);
     }
 
     @Override
