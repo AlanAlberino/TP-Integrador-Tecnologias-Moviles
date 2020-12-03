@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/portadaInicio"
-        android:layout_width="0dp"
+        android:layout_width="fill_parent"
         android:layout_height="400dp"
         android:adjustViewBounds="true"
         android:background="#222222"
@@ -118,15 +118,15 @@
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
         android:text="@string/tellYourFriends"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="20dp"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -138,7 +138,6 @@
         android:text="@string/shareThisLink"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />

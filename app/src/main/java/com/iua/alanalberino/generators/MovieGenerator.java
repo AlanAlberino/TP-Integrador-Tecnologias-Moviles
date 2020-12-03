@@ -1,7 +1,10 @@
 package com.iua.alanalberino.generators;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.util.Log;
 
+import com.iua.alanalberino.Constantes;
 import com.iua.alanalberino.async.DownloadFilesTask;
 import com.iua.alanalberino.model.Movie;
 import com.iua.alanalberino.persistence.MoviesRepository;
@@ -11,15 +14,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MovieGenerator {
 
     ArrayList<Movie> movies;
     Application app;
+    private SharedPreferences sharedPreferences;
 
     public MovieGenerator(Application app) {
         this.app = app;
+        sharedPreferences = app.getApplicationContext().getSharedPreferences(Constantes.PREFS_NAME, MODE_PRIVATE);
     }
 
     public ArrayList<Movie> generateMovies(int cat) throws ExecutionException, InterruptedException, JSONException {
@@ -107,6 +115,69 @@ public class MovieGenerator {
         DownloadFilesTask getRequest = new DownloadFilesTask();
         String result = getRequest.execute(myUrl).get();
         return generarPelicula(new JSONObject(result), 0);
+    }
+
+    public ArrayList<Movie> getNowPlaying(String countryCode) throws JSONException, ExecutionException, InterruptedException{
+        movies = new ArrayList<Movie>();
+
+        String myUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=ef7cd5f6820e2df3368478f9ecb07597&language=en-US&page=1&region="+countryCode;
+
+        DownloadFilesTask getRequest = new DownloadFilesTask();
+        String result = getRequest.execute(myUrl).get();
+
+        JSONArray peliculas = new JSONObject(result).getJSONArray("results");
+        for(int i=0; i<peliculas.length();i++){
+            try{
+                movies.add(generarPelicula(peliculas.getJSONObject(i), 0));
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+
+        return movies;
+    }
+
+    public ArrayList<Movie> getPopular(String countryCode) throws JSONException, ExecutionException, InterruptedException {
+        movies = new ArrayList<Movie>();
+
+        String myUrl = "https://api.themoviedb.org/3/movie/popular?api_key=ef7cd5f6820e2df3368478f9ecb07597&language=en-US&page=1&region="+countryCode;
+
+        DownloadFilesTask getRequest = new DownloadFilesTask();
+        String result = getRequest.execute(myUrl).get();
+
+        JSONArray peliculas = new JSONObject(result).getJSONArray("results");
+        for(int i=0; i<peliculas.length();i++){
+            try{
+                movies.add(generarPelicula(peliculas.getJSONObject(i), 0));
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+
+        return movies;
+    }
+
+    public ArrayList<Movie> getFavorites() throws JSONException, ExecutionException, InterruptedException {
+        movies = new ArrayList<Movie>();
+        String sessionId = sharedPreferences.getString(Constantes.SESSION_ID, "");
+        int userId = sharedPreferences.getInt(Constantes.USER_ID, 0);
+
+        String myUrl = "https://api.themoviedb.org/3/account/"+userId+"/favorite/movies?api_key=ef7cd5f6820e2df3368478f9ecb07597&session_id="+sessionId+"&language=es-MX&sort_by=created_at.asc&page=1";
+        Log.i("MovieGenerator", "URL: "+"https://api.themoviedb.org/3/account/"+userId+"/favorite/movies?api_key=ef7cd5f6820e2df3368478f9ecb07597&session_id="+sessionId+"&language=es-MX&sort_by=created_at.asc&page=1");
+        DownloadFilesTask getRequest = new DownloadFilesTask();
+        String result = getRequest.execute(myUrl).get();
+
+        JSONArray peliculas = new JSONObject(result).getJSONArray("results");
+        for(int i=0; i<peliculas.length();i++){
+            try{
+                movies.add(generarPelicula(peliculas.getJSONObject(i), 0));
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+
+
+        return movies;
     }
 
 }

@@ -1,19 +1,32 @@
 package com.iua.alanalberino.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.iua.alanalberino.Constantes;
+import com.iua.alanalberino.activities.MainActivity;
+import com.iua.alanalberino.async.DownloadFilesTask;
 import com.iua.alanalberino.model.Favorite;
 import com.iua.alanalberino.persistence.FavoritesRepository;
 import com.iua.alanalberino.model.Movie;
@@ -22,11 +35,18 @@ import com.iua.alanalberino.R;
 import com.iua.alanalberino.persistence.UserRepository;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MovieFragment extends Fragment {
 
+    private SharedPreferences sharedPreferences;
+    private RequestQueue requestQueue;
     private int id;
     Context context;
 
@@ -38,6 +58,8 @@ public class MovieFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         try {
+            sharedPreferences = view.getContext().getSharedPreferences(Constantes.PREFS_NAME, MODE_PRIVATE);
+            requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
             MovieGenerator movieGenerator = new MovieGenerator(getActivity().getApplication());
             final Movie movie = movieGenerator.getPeliculaByID(id);
             TextView titleTextView = (TextView) view.findViewById(R.id.textView18);
@@ -54,7 +76,7 @@ public class MovieFragment extends Fragment {
 
             final UserRepository userRepository = new UserRepository(getActivity().getApplication());
             final FavoritesRepository favoritesRepository = new FavoritesRepository(getActivity().getApplication());
-            final Favorite isFavorite = favoritesRepository.isMarkedAsFavorite(new Favorite(userRepository.getLoggedUser().getId(), (long) movie.getId()));
+            final Favorite isFavorite = favoritesRepository.isMarkedAsFavorite(new Favorite((long) sharedPreferences.getInt(Constantes.USER_ID, 0), (long) movie.getId()));
             final ImageView star = (ImageView) view.findViewById(R.id.imageView16);
             //Si está marcado como favoritos, cambio la estrella apagada a la estrella encendida
 
@@ -68,12 +90,22 @@ public class MovieFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if(isFavorite!=null){
-                        favoritesRepository.removeAsFavorite(new Favorite(userRepository.getLoggedUser().getId(), (long) movie.getId()));
+                        favoritesRepository.removeAsFavorite(new Favorite((long) sharedPreferences.getInt(Constantes.USER_ID, 0), (long) movie.getId()));
                         star.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_off));
+                        try {
+                            quitarFavoritoAPI((long) movie.getId());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                     else{
-                        favoritesRepository.markAsFavorite(new Favorite(userRepository.getLoggedUser().getId(), (long) movie.getId()));
+                        favoritesRepository.markAsFavorite(new Favorite((long) sharedPreferences.getInt(Constantes.USER_ID, 0), (long) movie.getId()));
                         star.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+                        try {
+                            agregarFavoritoAPI((long) movie.getId());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                 }
@@ -106,6 +138,57 @@ public class MovieFragment extends Fragment {
         //mViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
         // TODO: Use the ViewModel
     }
+
+    private void quitarFavoritoAPI(final long idPelicula) throws JSONException {
+
+        int userId = sharedPreferences.getInt(Constantes.USER_ID, 0);
+        String sessionId = sharedPreferences.getString(Constantes.SESSION_ID, "");
+
+        String url = "https://api.themoviedb.org/3/account/"+userId+"/favorite?api_key=ef7cd5f6820e2df3368478f9ecb07597&session_id="+sessionId;
+        final JSONObject jsonBody = new JSONObject("{\"media_type\":\"movie\",\"media_id\":"+idPelicula+",\"favorite\":false }");
+        JsonObjectRequest req = new JsonObjectRequest(url, jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.i("MovieFragment", "Favorito quitado");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        requestQueue.add(req);
+    }
+
+    private void agregarFavoritoAPI(final long idPelicula) throws JSONException {
+
+        int userId = sharedPreferences.getInt(Constantes.USER_ID, 0);
+        String sessionId = sharedPreferences.getString(Constantes.SESSION_ID, "");
+
+        String url = "https://api.themoviedb.org/3/account/"+userId+"/favorite?api_key=ef7cd5f6820e2df3368478f9ecb07597&session_id="+sessionId;
+        final JSONObject jsonBody = new JSONObject("{\"media_type\":\"movie\",\"media_id\":"+idPelicula+",\"favorite\":true }");
+        JsonObjectRequest req = new JsonObjectRequest(url, jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.i("MovieFragment", "Favorito quitado");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        requestQueue.add(req);
+    }
+
 
 
 }

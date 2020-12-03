@@ -32,7 +32,7 @@
         android:ems="10"
         android:hint="@string/insertUser"
         android:inputType="textPersonName"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textColorHint="@color/darkGrey"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"

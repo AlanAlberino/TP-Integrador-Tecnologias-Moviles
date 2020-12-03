@@ -24,4 +24,8 @@ public interface FavoritesDAO {
     @Query("DELETE FROM favorites WHERE userID == :userID AND movieID  == :movieID")
     void removeAsFavorite(Long userID, Long movieID);
 
+    @Query("DELETE FROM favorites")
+    void deleteAll();
+
+
 }

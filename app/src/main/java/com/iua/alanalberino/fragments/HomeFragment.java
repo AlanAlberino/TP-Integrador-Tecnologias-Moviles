@@ -25,6 +25,7 @@ import com.iua.alanalberino.persistence.MoviesRepository;
 
 import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment {
             noInternetDialogFragment.show(getParentFragmentManager(), "noInternetDialogFragment");
         }
         else{
-            CategoryGenerator categoryGenerator = new CategoryGenerator(getActivity().getApplication());
+            CategoryGenerator categoryGenerator = new CategoryGenerator(getActivity().getApplication(), getActivity());
             try {
                 categories = categoryGenerator.initCategory();
             } catch (ExecutionException e) {
@@ -69,6 +70,8 @@ public class HomeFragment extends Fragment {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

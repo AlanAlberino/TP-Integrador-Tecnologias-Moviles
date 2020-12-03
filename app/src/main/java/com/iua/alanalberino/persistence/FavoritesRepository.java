@@ -33,6 +33,10 @@ public class FavoritesRepository {
         return new isMarkedAsFavoriteAsyncTask(favoritesDAO).execute(favorite).get();
     }
 
+    public void deleteAll(){
+        new removeAllAsyncTask(favoritesDAO).execute();
+    }
+
 
     private static class markAsFavoriteAsyncTask extends AsyncTask<Favorite, Void, Void> {
         private FavoritesDAO asyncTaskFavoritesDAO;
@@ -73,6 +77,17 @@ public class FavoritesRepository {
         @Override
         protected Favorite doInBackground(Favorite... favorites) {
             return asyncTaskFavoritesDAO.isMarkedAsFavorite(favorites[0].getUserID(), favorites[0].getMovieID());
+        }
+    }
+
+    private static class removeAllAsyncTask extends AsyncTask<Void, Void, Void> {
+        private FavoritesDAO asyncTaskFavoritesDAO;
+        removeAllAsyncTask(FavoritesDAO favoritesDAO) { asyncTaskFavoritesDAO = favoritesDAO; }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            asyncTaskFavoritesDAO.deleteAll();
+            return null;
         }
     }
 

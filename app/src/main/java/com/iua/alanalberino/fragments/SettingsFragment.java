@@ -1,6 +1,7 @@
 package com.iua.alanalberino.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,12 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.iua.alanalberino.Constantes;
 import com.iua.alanalberino.activities.LoginActivity;
 import com.iua.alanalberino.R;
 import com.iua.alanalberino.persistence.UserRepository;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class SettingsFragment extends Fragment {
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,11 +38,14 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        sharedPreferences = view.getContext().getSharedPreferences(Constantes.PREFS_NAME, MODE_PRIVATE);
+
         View.OnClickListener logoutListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserRepository repository = new UserRepository(getActivity().getApplication());
-                repository.setAsLoggedOut(repository.getLoggedUser());
+                sharedPreferences.edit().remove(Constantes.USER_ID).commit();
+                sharedPreferences.edit().remove(Constantes.SESSION_ID).commit();
                 getActivity().finish();
                 Intent listIntent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(listIntent);

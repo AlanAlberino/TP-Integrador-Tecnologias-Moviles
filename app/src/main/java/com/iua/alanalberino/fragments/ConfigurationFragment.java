@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.iua.alanalberino.Constantes;
 import com.iua.alanalberino.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -20,7 +21,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ConfigurationFragment extends Fragment {
 
-    private static final String PREFS_NAME ="com.iua.alanalberino.prefs";
+
     SharedPreferences sharedPreferences;
     CategorySelectionFragment categorySelectionFragment;
 
@@ -40,15 +41,15 @@ public class ConfigurationFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
 
-        sharedPreferences  = getActivity().getApplicationContext().getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+        sharedPreferences  = getActivity().getApplicationContext().getSharedPreferences(Constantes.PREFS_NAME ,MODE_PRIVATE);
 
         //Configuro el check listener para el switch que permite activar o desactivar las notificaciones diarias
 
         Switch switch1 = (Switch) getView().findViewById(R.id.switch1);
         switch1.setOnCheckedChangeListener(new  CompoundButton.OnCheckedChangeListener(){
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) sharedPreferences.edit().putBoolean("SendDailyNotification", true).apply();
-                else sharedPreferences.edit().putBoolean("SendDailyNotification", false).apply();
+                if(isChecked) sharedPreferences.edit().putBoolean(Constantes.DAILY_NOTIFICATION, true).apply();
+                else sharedPreferences.edit().putBoolean(Constantes.DAILY_NOTIFICATION, false).apply();
             }
         });
 
@@ -63,4 +64,5 @@ public class ConfigurationFragment extends Fragment {
         selectCategoriesTextView.setOnClickListener(categorySelectionListener);
 
     }
+
 }

@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.iua.alanalberino.Constantes;
 import com.iua.alanalberino.model.Category;
 import com.iua.alanalberino.persistence.CategoriesRepository;
 
@@ -43,7 +44,7 @@ public class CategorySelectionFragment extends DialogFragment {
         }
 
         final boolean[] checkedCategoriesArray = new boolean[categoriesArray.length];
-        String desiredCats = sharedPreferences.getString("DesiredCats", "");
+        String desiredCats = sharedPreferences.getString(Constantes.DESIRED_CATEGORIES, "");
 
         for(int i=0; i<categoriesArray.length;i++){
             if(desiredCats.compareTo("")==0 || desiredCats.indexOf(categoriesArray[i])>=0)
@@ -75,7 +76,7 @@ public class CategorySelectionFragment extends DialogFragment {
                         cats+= finalCategoriesArray[i];
                     }
                 }
-                sharedPreferences.edit().putString("DesiredCats", cats).apply();
+                sharedPreferences.edit().putString(Constantes.DESIRED_CATEGORIES, cats).apply();
             }
         });
         // Set the neutral/cancel button click listener
